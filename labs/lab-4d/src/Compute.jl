@@ -19,6 +19,13 @@ function compute_bag_of_words(sentences::Dict{Int,String})::Dict{String,Int}
         # Impl me -
         # Fill up the bag_of_words dictionary. 
         # The keys should be the individual words, and the values should be their count
+        for w ∈ words
+            if(haskey(bag_of_words, w))
+                bag_of_words[w] += 1
+            else
+                bag_of_words[w] = 1;
+            end
+        end
 
     end
 

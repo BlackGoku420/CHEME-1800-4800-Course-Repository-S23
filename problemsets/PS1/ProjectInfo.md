@@ -1,0 +1,8 @@
+## Collaborators
+    I worked with Jake and Gavin to further understand what the code was doing and the process we should take to implement it. We worked on the coding portions separately, but worked together to make sure we got the concepts.
+
+## What was done
+    The encryption method takes in a String and returns a Dictionary of type {Int64, String}. In the method itself, the dictionary that would be returned at the end and a counter variable were initialized. The encryption key was built and then a loop was created that would loop through each character of the String and store in the encryption for that character at a specific index in the dictionary. After the character encryption is stored, the counter increases by 1 and the same process continues until the end of the string is reached.
+
+    For the decryption method, a Dictionary of type {Int64, String} is taken in and a String is returned. The number of characters of the encrypted data is stored in a variable, and the variable that will be returned later is set up along with a Dictionary of type {String, Char}, which is opposite from the typing of the encryption key dictionary, as this method is meant to go from encryption back to a normal String. The inverse encryption key is built by use of a for loop, and then another for loop is created that loops from 0 to the number of characters of the encrypted data-1. This loop saves the encrypted data at index i and another variable stores the inverse encryption key value for that encrypted data. These 2 variables are then inserted into the vector of Chars that is meant to be returned. Once the loop is done, this vector is cast to a String and then returned.
+
