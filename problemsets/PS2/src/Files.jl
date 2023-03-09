@@ -3,6 +3,9 @@
     read_compounds_file(path::String) -> Dict{String, MyChemicalCompoundModel}
 
 TODO: Describe what this function is doing, the args and the what is contained in the data that is returned.
+    take in a file path, reads through file line by line, cuts by a specific delimiter, and the data is stored
+    in a dictionary of type {String, MyChemicalCompoundModel}
+    the MyChemicalCompoundModel is built with the data taken from the line itself, stored in this dictionary, and that dictionary is returned
 """
 function read_compounds_file(path::String)::Dict{String, MyChemicalCompoundModel}
     
@@ -26,7 +29,24 @@ function read_compounds_file(path::String)::Dict{String, MyChemicalCompoundModel
             # b) ignore the header data
             # c) records are comma delimited. Check out the split functions: https://docs.julialang.org/en/v1/base/strings/#Base.split
             # d) from the data in each reacord, we need to build a MyChemicalCompoundModel object. Each compound object should be stored in the compound dict with the name as the key
-            
+            if(contains(line, "#") == false)
+                for i ∈ line
+                    if(isnumeric(i) == true)
+                        # split by the comma delimiter
+                        fields = split(line, ",")
+
+                        #grab the fields
+                        name = string(fields[1]);
+                        formula = string(fields[2]);
+                        
+                        # build the model
+                        model = build(MyChemicalCompoundModel, name, formula)
+
+                        # add model to dictionary
+                        compounds[name] = model;
+                    end
+                end
+            end
         end
     end
 
