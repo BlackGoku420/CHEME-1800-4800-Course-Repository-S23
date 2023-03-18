@@ -16,7 +16,9 @@ function modes(U::Array{Float64,2}, Σ::Array{Float64,1},
 
     # main loop -
     # implement here ...
-    
+    for i ∈ 1:number_of_modes
+        modes_dictionary[i] = Σ[i]*(⊗(U[:,i],V[:,i]))                                 
+    end
 
     # return -
     return modes_dictionary;

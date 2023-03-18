@@ -57,5 +57,6 @@ function solve(type::T, A::Array{Float64,2}, b::Array{Float64,1}, xₒ::Array{Fl
         return _gauss_seidel_iteration_solver(A, b, xₒ, tolerance, maxiter);
     else
         throw("Incorrect solver type has been requested!")
+        
     end
 end

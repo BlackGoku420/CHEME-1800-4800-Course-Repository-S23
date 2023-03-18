@@ -4,6 +4,14 @@
 Internal function that constructs the right-hand side vector for the chemical decay problem
 """
 function _build_right_handside_vector(N::Int64, κ::Float64, h::Float64, Cₒ::Float64)::Array{Float64,1}
+        conc_vector = zeros(N)
+        conc_vector[1] = Cₒ
+        for j in 2:2:N
+            conc_vector[j] = conc_vector[j] - h*κ*conc_vector[j]
+        end
+        
+        #return
+        return conc_vector      
 end
 
 """
@@ -12,17 +20,30 @@ end
 Internal function that constructs the system matrix for the chemical decay problem
 """
 function _build_system_matrix(N::Int64, κ::Float64, h::Float64)::Array{Float64,2}
+    conc_matrix = zeros(N,N)
+    for i ∈ 1:N
+        for j ∈ 1:N
+            if (i == j)
+                conc_matrix[i,j] = 1;
+            elseif (i > j)
+                 conc_matrix[i,j] = (κ*h)-1
+            else
+                conc_matrix[i,j] = 0
+            end
+        end
+    end
+
+    #return
+    return conc_matrix
 end
 
 """
-    build(type::Type{MyChemicalDecayModel}; 
-        κ::Float64 = 0.0, h::Float64 = 0.0, N::Int64 = 0, Cₒ::Float64 = 0.0) -> MyChemicalDecayModel
+    build(type::Type{MyChemicalDecayModel}, κ::Float64 = 0.0, h::Float64 = 0.0, N::Int64 = 0, Cₒ::Float64 = 0.0)::MyChemicalDecayModel
 
 Build an instance of MyChemicalDecayModel and sets the value of the model parameters. 
 Default model parameters are zero
 """
-function build(type::Type{MyChemicalDecayModel}; 
-    κ::Float64 = 0.0, h::Float64 = 0.0, N::Int64 = 0, Cₒ::Float64 = 0.0)::MyChemicalDecayModel
+function build(type::Type{MyChemicalDecayModel}; κ::Float64 = 0.0, h::Float64 = 0.0, N::Int64 = 0, Cₒ::Float64 = 0.0)::MyChemicalDecayModel
 
     # build an empty model -
     model = MyChemicalDecayModel()
