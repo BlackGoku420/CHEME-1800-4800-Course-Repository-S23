@@ -19,7 +19,7 @@ push!(absorbing_state_set, (3,3));
 world_model = build(MyRectangularGridWorldModel, number_of_rows, number_of_rows, rewards);
 
 # Step 2: Build a model of the agent -
-α = 0.1;  # learning rate
+α = 0.70;  # learning rate
 γ = 0.95; # discount rate
 nstates = (number_of_rows*number_of_cols);
 nactions = 4; 

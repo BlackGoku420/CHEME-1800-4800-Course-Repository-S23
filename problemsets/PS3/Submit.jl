@@ -40,6 +40,7 @@ det_case_1 = det(case_1.A)
 det_case_2 = det(case_2.A)
 det_case_3 = det(case_3.A)
 
+
 #jacobi norms
 j_norm_1 = norm(jacobi_1 - prod_inv_1)
 j_norm_2 = norm(jacobi_2 - prod_inv_2)
@@ -49,5 +50,6 @@ j_norm_3 = norm(jacobi_3 - prod_inv_3)
 g_norm_1 = norm(gauss_1 - prod_inv_1)
 g_norm_2 = norm(gauss_2 - prod_inv_2)
 g_norm_3 = norm(gauss_3 - prod_inv_3)
+
 
 

@@ -4,14 +4,13 @@
 Internal function that constructs the right-hand side vector for the chemical decay problem
 """
 function _build_right_handside_vector(N::Int64, κ::Float64, h::Float64, Cₒ::Float64)::Array{Float64,1}
-        conc_vector = zeros(N)
-        conc_vector[1] = Cₒ
-        for j in 2:2:N
-            conc_vector[j] = conc_vector[j] - h*κ*conc_vector[j]
-        end
         
-        #return
-        return conc_vector      
+    conc_vector = zeros(N)
+    conc_vector[1] = Cₒ*(1-κ*h);
+
+        
+    #return
+    return conc_vector      
 end
 
 """
@@ -21,14 +20,13 @@ Internal function that constructs the system matrix for the chemical decay probl
 """
 function _build_system_matrix(N::Int64, κ::Float64, h::Float64)::Array{Float64,2}
     conc_matrix = zeros(N,N)
-    for i ∈ 1:N
-        for j ∈ 1:N
+    conc_matrix[1,1] = 1.0;
+    for i ∈ 2:N
+        for j ∈ 2:N
             if (i == j)
-                conc_matrix[i,j] = 1;
+                conc_matrix[i,j] = 1.0;
             elseif (i > j)
-                 conc_matrix[i,j] = (κ*h)-1
-            else
-                conc_matrix[i,j] = 0
+                 conc_matrix[i,j] = (κ*h-1)
             end
         end
     end
